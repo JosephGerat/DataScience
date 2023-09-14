@@ -28,10 +28,14 @@ def standard_deviation(xs: List[float]):
 
 def quantile(xs: List[float], p: float):
     """ Returns pth-percentile value in x"""
-    sorted(xs)
+    p_index = int(p*len(xs))
+    return sorted(xs)[p_index]
 
 v = variance(num_friends)
 assert 81.54 < v < 81.55
 
 sd = standard_deviation(num_friends)
 print(sd)
+
+q = quantile([i for i in range(10)], 0.75)
+assert q == 7
