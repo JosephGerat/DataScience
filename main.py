@@ -22,15 +22,6 @@ def square(x: float) -> float:
 def derivative(x: float) -> float:
     return 2 * x
 
-def partial_difference_quotient(f: Callable[[Vector], float],
-                                v: Vector,
-                                i: int,
-                                h: float) -> float:
-    """Returns the i-th partial difference quotient of f at v"""
-    w = [v_j + (h if j == i else 0)  # add h to just the ith element of v
-         for j, v_j in enumerate(v)]
-
-    return (f(w) - f(v)) / h
 
 def estimate_gradient(f: Callable[[Vector], float],
                       v: Vector,
@@ -62,7 +53,7 @@ def linear_gradient(x: float, y: float, theta: Vector) -> Vector:
     slope, intercept = theta
     predicted = slope * x + intercept  # The prediction of the model.
     error = (predicted - y)  # error is (predicted - actual)
-    squared_error = error ** 2  # We'll minimize squared error
+    #squared_error = error ** 2  # We'll minimize squared error
     grad = [2 * error * x, 2 * error]  # using its gradient.
     return grad
 
@@ -101,7 +92,15 @@ def main():
 
     plt.close()
 
+    def partial_difference_quotient(f: Callable[[Vector], float],
+                                    v: Vector,
+                                    i: int,
+                                    h: float) -> float:
+        """Returns the i-th partial difference quotient of f at v"""
+        w = [v_j + (h if j == i else 0)  # add h to just the ith element of v
+             for j, v_j in enumerate(v)]
 
+        return (f(w) - f(v)) / h
 
     # "Using the Gradient" example
 
